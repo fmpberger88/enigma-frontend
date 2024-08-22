@@ -1,5 +1,4 @@
 import axios from 'axios'
-import error from "eslint-plugin-react/lib/util/error.js";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
