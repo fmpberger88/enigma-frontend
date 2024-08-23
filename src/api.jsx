@@ -4,6 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
+    withCredentials: true,
 })
 
 const handleError = (error) => {
@@ -23,7 +24,7 @@ const handleError = (error) => {
 
 export const register = async (userData) => {
     try {
-        const response = await axiosInstance.post('/register', userData);
+        const response = await axiosInstance.post('auth/register', userData);
         return response.data
     } catch (error) {
         handleError(error);
@@ -32,7 +33,7 @@ export const register = async (userData) => {
 
 export const login = async (userData) => {
     try {
-        const response = await axiosInstance.post('/login', userData);
+        const response = await axiosInstance.post('auth/login', userData);
         return response.data;
     } catch (error) {
         handleError(error);
