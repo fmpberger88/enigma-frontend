@@ -1,0 +1,36 @@
+.landingPageContainer {
+    display: flex;
+    height: 100vh;
+}
+
+.leftPage {
+    display: flex;
+    background-color: #003f5c;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+}
+
+.rightPage {
+    display: flex;
+    background-color: #ffa600;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1.5;
+}
+
+.link {
+    color: #ff8531;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #ffd380;
+}
+
+.secureTalkImage {
+    width: 80%;
+    height: auto;
+}
