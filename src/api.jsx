@@ -1,14 +1,14 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
     withCredentials: true,
-})
+});
 
 const handleError = (error) => {
-    console.log(error)
+    console.log(error);
     if (error.response) {
         console.error(`Error: ${error.response.status} - ${error.response.data.message}`);
         // Verwenden Sie die vom Backend bereitgestellte Fehlermeldung
@@ -22,20 +22,72 @@ const handleError = (error) => {
     }
 };
 
+// Registrierung
 export const register = async (userData) => {
     try {
-        const response = await axiosInstance.post('auth/register', userData);
-        return response.data
+        const response = await axiosInstance.post('/auth/register', userData);
+        return response.data;
     } catch (error) {
         handleError(error);
     }
 };
 
+// Login
 export const login = async (userData) => {
     try {
-        const response = await axiosInstance.post('auth/login', userData);
+        const response = await axiosInstance.post('/auth/login', userData);
         return response.data;
     } catch (error) {
         handleError(error);
     }
-}
+};
+
+// Neuen Chat erstellen
+export const createChat = async (username) => {
+    try {
+        const response = await axiosInstance.post('/api/chats/create', { username });
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+};
+
+// Alle Chats des Benutzers abrufen
+export const getChats = async () => {
+    try {
+        const response = await axiosInstance.get('/api/chats');
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+};
+
+// Nachricht an einen bestimmten Chat senden
+export const sendMessageToChat = async (chatId, content) => {
+    try {
+        const response = await axiosInstance.post(`/api/chats/${chatId}/message`, { content });
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+};
+
+// Nachrichten in einem bestimmten Chat abrufen
+export const getMessagesInChat = async (chatId) => {
+    try {
+        const response = await axiosInstance.get(`/api/chats/${chatId}/messages`);
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+};
+
+// Nachricht als gelesen markieren und nach 30 Sekunden löschen
+export const markMessageAsRead = async (messageId) => {
+    try {
+        const response = await axiosInstance.post(`/api/chats/message/${messageId}/read`);
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+};
