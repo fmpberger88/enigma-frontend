@@ -1,0 +1,9 @@
+.chatList {
+    width: 30%;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+
+.selected {
+    background-color: #999;
+}
