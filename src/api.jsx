@@ -8,11 +8,22 @@ const axiosInstance = axios.create({
 });
 
 const handleError = (error) => {
-    console.log(error);
     if (error.response) {
-        console.error(`Error: ${error.response.status} - ${error.response.data.message}`);
-        // Verwenden Sie die vom Backend bereitgestellte Fehlermeldung
-        throw new Error(error.response.data.message || error.response.data.error.message || 'An error occurred');
+        console.error(`Error: ${error.response.status} - ${error.response.data.error || error.response.data.errors}`);
+
+        // Überprüfen, ob 'errors' ein Array ist und die spezifischen Nachrichten extrahieren
+        if (Array.isArray(error.response.data.errors)) {
+            const errorMessage = error.response.data.errors.map(err => err.msg).join(' ');
+            throw new Error(errorMessage);
+        }
+
+        // Wenn nur eine einzelne Fehlermeldung vorliegt
+        if (error.response.data.error) {
+            throw new Error(error.response.data.error);
+        }
+
+        // Fallback für den Fall, dass kein spezifischer Fehler vorliegt
+        throw new Error('An error occurred');
     } else if (error.request) {
         console.error('Error: No response received from server');
         throw new Error('No response received from server');
@@ -21,6 +32,7 @@ const handleError = (error) => {
         throw new Error(error.message);
     }
 };
+
 
 // Registrierung
 export const register = async (userData) => {
@@ -39,6 +51,16 @@ export const login = async (userData) => {
         return response.data;
     } catch (error) {
         handleError(error);
+    }
+};
+
+// Funktion, um den aktuellen Benutzer abzurufen
+export const getCurrentUser = async () => {
+    try {
+        const response = await axiosInstance.get('/auth/me');  // Standard-Route für aktuellen Benutzer
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to fetch current user');
     }
 };
 
