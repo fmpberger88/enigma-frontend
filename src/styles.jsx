@@ -1,6 +1,10 @@
 import styled from '@emotion/styled'
 import {Form} from "react-router-dom";
 
+export const MainContainer = styled.main`
+    background-color: #003f5c;
+`
+
 export const StyledForm = styled(Form)`
     display: flex;
     flex-direction: column;
@@ -10,7 +14,7 @@ export const StyledForm = styled(Form)`
     margin: 4rem auto;
     padding: 2rem;
     background-color: #003f5c;
-    min-height: 60vh;
+    min-height: 20vh;
     border-radius: 10px;
     width: 100%;
     
@@ -57,4 +61,15 @@ export const StyledForm = styled(Form)`
             width: 100%;
         }
     }
+`
+
+export const StyledButton = styled.button`
+    background-color: #8a508f;
+    color: #003f5c;
+    font-weight: bold;
+    font-size: 1.25rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 `
