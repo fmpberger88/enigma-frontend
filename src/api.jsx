@@ -11,19 +11,15 @@ const handleError = (error) => {
     if (error.response) {
         console.error(`Error: ${error.response.status} - ${error.response.data.error || error.response.data.errors}`);
 
-        // Überprüfen, ob 'errors' ein Array ist und die spezifischen Nachrichten extrahieren
-        if (Array.isArray(error.response.data.errors)) {
+        // Überprüfen, ob 'error' oder 'errors' existieren und sie weiterverarbeiten
+        if (error.response.data.error) {
+            throw new Error(error.response.data.error);
+        } else if (Array.isArray(error.response.data.errors)) {
             const errorMessage = error.response.data.errors.map(err => err.msg).join(' ');
             throw new Error(errorMessage);
         }
 
-        // Wenn nur eine einzelne Fehlermeldung vorliegt
-        if (error.response.data.error) {
-            throw new Error(error.response.data.error);
-        }
-
-        // Fallback für den Fall, dass kein spezifischer Fehler vorliegt
-        throw new Error('An error occurred');
+        throw new Error('An unknown error occurred');
     } else if (error.request) {
         console.error('Error: No response received from server');
         throw new Error('No response received from server');
@@ -98,6 +94,7 @@ export const sendMessageToChat = async (chatId, content) => {
 export const getMessagesInChat = async (chatId) => {
     try {
         const response = await axiosInstance.get(`/api/chats/${chatId}/messages`);
+        console.log(response)
         return response.data;
     } catch (error) {
         handleError(error);
