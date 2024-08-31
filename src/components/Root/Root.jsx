@@ -1,14 +1,16 @@
-import {Outlet} from "react-router-dom";
 import Footer from "../Footer/Footer.jsx";
+import Header from "../Header/Header.jsx";
+import Dashboard from "../Dashboard/Dashboard.jsx";
+import {MainContainer} from "../../styles.jsx";
 
 
 const Root = () => {
     return (
         <>
-            <main>
-                <h1>Hello World!</h1>
-                <Outlet />
-            </main>
+            <Header />
+            <MainContainer>
+                <Dashboard />
+            </MainContainer>
             <Footer />
         </>
     )
