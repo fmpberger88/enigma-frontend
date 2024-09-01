@@ -1,0 +1,36 @@
+/* Dashboard.module.css */
+.dashboard {
+    display: flex;
+}
+
+.chatList {
+    width: 30%;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+
+.chatWindow {
+    width: 70%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .chatList {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .chatWindow {
+        width: 100%;
+        padding: 10px;
+    }
+}

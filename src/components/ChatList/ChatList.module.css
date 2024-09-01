@@ -1,9 +1,25 @@
 .chatList {
-    width: 30%;
-    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.chatItem {
     padding: 10px;
+    margin: 5px 0;
+    background-color: white; /* Standard-Hintergrundfarbe */
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    transition: background-color 0.3s ease; /* Sanfter Übergang für Farbänderungen */
+}
+
+.chatItem:hover {
+    background-color: #e1e1e1; /* Farbe beim Hovern */
 }
 
 .selected {
-    background-color: #999;
+    background-color: #721c24 !important; /* Persistente Hintergrundfarbe für ausgewähltes Element */
+    color: white; /* Optional: Textfarbe für ausgewähltes Element */
+    font-weight: bold; /* Optional: Schrift fett darstellen */
 }
