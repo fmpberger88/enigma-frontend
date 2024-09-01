@@ -10,7 +10,7 @@ import secureTalk from '/be9d282b-e9de-4df7-b4fb-120a2d0f3503.webp'
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     const mutation = useMutation({
@@ -19,13 +19,24 @@ const Login = () => {
             navigate("/dashboard");
         },
         onError: (error) => {
-            setError(error.message);
-        },
+            console.log("Error:", error);
+
+            let errorMessage = "An unknown error occurred";
+
+            if (error.response && error.response.data && Array.isArray(error.response.data.errors)) {
+                // Fehler-Meldungen extrahieren und zu einer Nachricht zusammenfassen
+                errorMessage = error.response.data.errors.map(err => err.msg).join(' ');
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+
+            setErrorMessage(errorMessage);
+        }
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setError("");
+        setErrorMessage("");
         mutation.mutate({ username, password})
     }
 
@@ -34,7 +45,7 @@ const Login = () => {
             <div className={styles.leftPage}>
                 <StyledForm onSubmit={handleSubmit}>
                     <h1>EnigmaTalk</h1>
-                    {error && <ErrorMessage error={error}/>}
+                    {errorMessage && <ErrorMessage message={errorMessage}/>}
                     <input
                         type="text"
                         value={username}
