@@ -6,10 +6,9 @@ footer {
     flex-wrap: wrap;
     font-size: 1.25rem;
     gap: 2rem;
-    background-color: #213547;
+    background-color: #003f5c;
     width: 100%;
     padding: 2rem;
-    margin-top: 20rem;
 }
 
 .linkContainer {
