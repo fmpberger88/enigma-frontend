@@ -19,21 +19,31 @@ const Register = () => {
     const mutation = useMutation({
         mutationFn: register,
         onSuccess: () => {
-            setSuccessMessage("Registration successfull! Redirecting to login");
+            setSuccessMessage("Registration successful! Redirecting to login");
             setErrorMessage("");
             setTimeout(() => {
                 navigate('/');
-            }, 5000);
+            }, 3000);
         },
         onError: (error) => {
-            if (error.response && error.response.data && error.response.data.errors) {
-                setErrorMessage(error.response.data.errors.map(err => err.msg).join(' '));
-            } else {
-                setErrorMessage(error.message);
+            console.log("Error:", error);
+
+            let errorMessage = "An unknown error occurred";
+
+            if (error.response && error.response.data && Array.isArray(error.response.data.errors)) {
+                // Fehler-Meldungen extrahieren und zu einer Nachricht zusammenfassen
+                errorMessage = error.response.data.errors.map(err => err.msg).join(' ');
+            } else if (error.message) {
+                errorMessage = error.message;
             }
+
+            setErrorMessage(errorMessage);
             setSuccessMessage("");
         }
     });
+
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
