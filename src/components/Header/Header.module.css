@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     padding: 30px;
-    background: #213547;
+    background: #003f5c;
     color: white;
 }
 
@@ -31,6 +31,17 @@ nav {
 .navGroup li {
     margin-right: 10px;
     font-size: 2rem;
+    color: white;
+}
+
+.navGroup li a {
+    text-decoration: none;
+    color: #ff8531;
+    font-weight: bold;
+}
+
+.navGroup li a:hover {
+    color: #ffd380;
 }
 
 .navButton {

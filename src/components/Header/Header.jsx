@@ -4,13 +4,12 @@ import styles from './Header.module.css';
 
 const Header = () => {
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Delete JWT Token
     const handleLogout = () => {
         localStorage.clear();
-        navigate('/login');
+        navigate('/');
     };
 
     const toggleModal = () => {
@@ -23,36 +22,16 @@ const Header = () => {
                 <nav>
                     <ul className={styles.navList}>
                         <div className={styles.navGroup}>
-                            <li>
-                                <NavLink to="/blogs">Blogs</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/categories">Categories</NavLink>
-                            </li>
                         </div>
                         <div className={styles.navGroup}>
-                            {!token ? (
-                                <>
-                                    <li>
-                                        <NavLink to="/login">Login</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to="/register">Register</NavLink>
-                                    </li>
-                                </>
-                            ) : (
-                                <>
-                                    <li>
-                                        <NavLink to="/create-blog">Create Blog</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to="/user/blogs">My Blogs</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink as="button" to="#" onClick={handleLogout}>Logout</NavLink>
-                                    </li>
-                                </>
-                            )}
+                            <>
+                                <li>
+                                    <NavLink to="#">My Account</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink as="button" to="#" onClick={handleLogout}>Logout</NavLink>
+                                </li>
+                            </>
                         </div>
                     </ul>
                 </nav>
@@ -65,36 +44,16 @@ const Header = () => {
                         <nav>
                             <ul className={styles.navList}>
                                 <div className={styles.navGroup}>
-                                    <li>
-                                        <NavLink to="/blogs" onClick={toggleModal}>Blogs</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to="/categories" onClick={toggleModal}>Categories</NavLink>
-                                    </li>
                                 </div>
                                 <div className={styles.navGroup}>
-                                    {!token ? (
-                                        <>
-                                            <li>
-                                            <NavLink to="/login" onClick={toggleModal}>Login</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to="/register" onClick={toggleModal}>Register</NavLink>
-                                            </li>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <li>
-                                                <NavLink to="/create-blog" onClick={toggleModal}>Create Blog</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to="/user/blogs" onClick={toggleModal}>My Blogs</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink as="button" to="#" onClick={() => { handleLogout(); toggleModal(); }}>Logout</NavLink>
-                                            </li>
-                                        </>
-                                    )}
+                                    <>
+                                        <li>
+                                            <NavLink to="#" onClick={toggleModal}>My Account</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink as="button" to="#" onClick={() => { handleLogout(); toggleModal(); }}>Logout</NavLink>
+                                        </li>
+                                    </>
                                 </div>
                             </ul>
                         </nav>
